@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	Right: <div id="right">0</div><br/>
+	Wrong: <div id="wrong">0</div>
+	Question: <div id="question"></div>
+	<script>
+	var questions = {
+		q1: ["This is true", true],
+		q2: ["This is false", false],
+		q3: ["This is false", false],
+		q4: ["This is true", true],
+		q5: ["This is false", false],
+		q6: ["This is false", false],
+		q7: ["This is true", true],
+		q8: ["This is false", false],
+		q9: ["This is false", false],
+		q10: ["This is true", true],
+	};
+	// questions.forEach(function(valueIs){
+	// 	console.log(valueIs);
+	// })
+	// console.log(questions.length);
+	// console.log(questions[2][1])
+	var questionValue = "";
+	var i = 0;
+	var right = 0;
+	var wrong = 0;
+
+	function giveRight(){
+		right++
+		document.getElementById("right").innerHTML = right;
+	}
+	function giveWrong(){
+		wrong++
+		document.getElementById("wrong").innerHTML = wrong;
+	}
+	function questionUpdate(){
+		document.getElementById("question").innerHTML = questionValue;
+	}
+
+function checkIfRight(quest){
+	document.onkeyup = function(event) {
+		console.log("Inside onkeyup!");
+		userInput = event.key;
+        if(questions[quest][i] === true){
+        	if(userInput === "t"){
+        		giveRight();
+        		loop();
+        	}else{
+        		giveWrong();
+        		loop();
+        	}
+        }else if(questions[quest][i] === false){
+        	if(userInput === "f"){
+        		giveRight();
+        		loop();
+        	}else{
+        		giveWrong();
+        		loop();
+        	}
+        }
+  	};
+}
+
+function loop(){
+		for(var quest in questions){
+		// console.log(questions.q1);
+		console.log(questions[quest][0]);
+		questionValue = questions[quest][0];//this works to get the question questions[quest][1] should get answer
+		checkIfRight(quest);
+	document.write(questions[quest][0] + "<br/>");
+	i++;
+	quest++;
+	// break;
+	}
+	checkIfRight(quest);
+}
+
+loop();
+	</script>
+</body>
+</html>

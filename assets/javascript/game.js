@@ -2,6 +2,7 @@ var lives = 1;
 var wins = 0;
 var loses = 0;
 var i = 0;
+var newLost = 0;
 
 var words = ["jquery", "python", "html", "javascript", "camelcase", "css", "mysql", "mongodb", "react"];
 // var randomValue = getWord();
@@ -12,13 +13,38 @@ var correctLetter = 0;
 function getWord() {
 	var randomValue = (Math.floor(Math.random() * words.length));
 	theWord = words[randomValue];
+	correctLetter = 0;
 	return theWord;
 }
 
 var fourLetters = document.getElementById("current-word");
 
+function addLetterToArray(){
+	lettersChosen.push(globalKeyStroke);
+	document.getElementById("letters-guessed").innerHTML = lettersChosen.toString();
+}
+
 function weHaveAWinner(){
 	wins++;
+	document.getElementById("wins").innerHTML = wins;
+}
+
+function weHaveALoser(){
+	loses++;
+	document.getElementById("loses").innerHTML = loses;
+	newLost = 1;
+	return false;
+}
+
+function setLives(x){
+	lives = x;
+	document.getElementById("lives").innerHTML = lives;
+}
+
+function loseLife(){
+	console.log("Lose a life!");
+	lives--;
+	document.getElementById("lives").innerHTML = lives;
 }
 
 function updateGetElement(x, y){
@@ -44,31 +70,42 @@ function checkIfInWord() {
 	// if(theWord.indexOf(globalKeyStroke) >= 0){
 
 	// }
-	for(var i = 0; i < theWord.length; i++){
+	
 		// needs to check each letter and then update each section as needed
-		if(theWord[i].indexOf(globalKeyStroke) >= 0){
-			console.log("In the If of the for in CheckIfInArray");
-			updateGetElement(i, globalKeyStroke);
-			correctLetter++; // This counts to correct number of letters to trigger winner!
-			if(correctLetter >= theWord.length){
-				weHaveAWinner();
-			}
-			break;
+		if(theWord.indexOf(globalKeyStroke) >= 0){
+			for(var i = 0; i < theWord.length; i++){
+				if(theWord[i].indexOf(globalKeyStroke) >= 0) {
+				console.log("In the If of the for in CheckIfInArray");
+				updateGetElement(i, globalKeyStroke);
+				correctLetter++; // This counts to correct number of letters to trigger winner!
+				addLetterToArray();
+				if(correctLetter >= theWord.length){
+					weHaveAWinner();
+				}}}
 			// console.log("Correct Letter Counter: " + correctLetter);
-		}else{
-			var newlives = lives - 2 + theWord.length;
 		}
-	}
+		else{
+			if(correctLetter < theWord.length){
+					loseLife();
+					addLetterToArray();
+				}
+		}
 }
 
 function checkIfInArray(){
 	for(var i = 0; i < lettersChosen.length + 1; i++){
 		if(lettersChosen.indexOf(globalKeyStroke) === -1){
 			console.log("In checkIfInArray and the letter has not been chosen before.");
-			lettersChosen.push(globalKeyStroke);
 			checkIfInWord();
 			return true;
 		}
+	}
+}
+
+function weLost(){
+	if(lives < 1){
+		console.log("In the weLost Function!");
+		return true;
 	}
 }
 
@@ -77,7 +114,8 @@ for(var i = 0; i < lives; i++){
 		globalKeyStroke = event.key;
 		if(event.keyCode === 32){
 		  getWord();
-		  lives = 15;
+		  setLives(2);
+		  newLost = 0;
 		  lettersChosen.length = 0;
 		  console.log("The Lives are: " + lives);
 		  chooseWord();
@@ -85,8 +123,12 @@ for(var i = 0; i < lives; i++){
 		  resetDivs();
 		}else{
 			//check if letter input is in word or in array
+			if(lives > 0){
 			console.log("Key Stroke is: " + globalKeyStroke);
 			checkIfInArray();
+			}else if(weLost() && newLost === 0){
+				weHaveALoser();
+			}
 		}
 	};
 }

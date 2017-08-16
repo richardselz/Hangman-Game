@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>My First Object</title>
+  </head>
+  <body>
+
+    <script>
+
+      var car = {
+        make: "Honda",
+        model: "Fit",
+        color: "Blue Raspberry",
+        mileage: 3000,
+        isWorking: true,
+
+        driveToWork: function() {
+
+          alert("Old Mileage: " + this.mileage);
+
+          this.mileage = this.mileage + 8;
+
+          alert("New mileage: " + this.mileage);
+        },
+
+        driveAroundWorld: function() {
+
+          alert("Old Mileage: " + this.mileage);
+
+          this.mileage = this.mileage + 24000;
+
+          alert("New Mileage: " + this.mileage);
+          alert("Car needs a tuneup!");
+
+          this.isWorking = false;
+        },
+
+        getTuneUp: function() {
+          alert("Car is ready to go!");
+          this.isWorking = true;
+        },
+
+        honk: function() {
+          alert("Honk! Honk!");
+        }
+      };
+
+      var hangMan = {
+        game: "HangMan",
+        isFun: "Nope",
+
+        theGame: function() {
+          console.log("In the game function!");
+        }
+      };
+
+      console.log("The Game is: " + hangMan.game + " is this game fun? " + hangMan.isFun);
+      hangMan.theGame();
+
+      // How would we log...
+
+      // The car's make?
+      console.log("The make of the car is: " + car.make);
+      console.log("The make of the car is: " + car["make"]);
+
+      // The car's model?
+      console.log("The cars model is: " + car.model + " or " + car["model"]);
+
+      // The car's mileage?
+      console.log("The cars mileage is: " + car.mileage + " or " + car["mileage"]);
+
+      // How would we run the car's driveToWork function?
+      console.log("The drive to work function value is running: " + car.driveToWork());
+      // car.driveToWork();
+
+      // How would we run the car's driveAroundWorld function?
+      console.log("The drive around the world function is running: " + car.driveAroundWorld());
+
+      // How would we run the getTuneUp function?
+      console.log("Running the get tune up function: " + car.getTuneUp());
+      console.log("Running the HONK function!" + car.honk());
+
+    </script>
+    
+  </body>
+</html>
