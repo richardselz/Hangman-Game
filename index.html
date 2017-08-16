@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" href="assets/css/reset.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+	<div class="container" style="background-color: #ccc;">
+		<div class="row">
+			<div class="col-xs-12">
+				<div class="row">
+					<div class="col-xs-12">
+						Welcome to Hangman!
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-6">Pictures Here</div>
+					<div class="col-xs-6">Press Spacebar to Get Started!<br/><br/>
+					Current Word<br/><br/>
+					<div id="current-word">
+						<div class="col-xs-1" id="1"></div>
+						<div class="col-xs-1" id="2"></div>
+						<div class="col-xs-1" id="3"></div>
+						<div class="col-xs-1" id="4"></div>
+						<div class="col-xs-1" id="5"></div>
+						<div class="col-xs-1" id="6"></div>
+						<div class="col-xs-1" id="7"></div>
+						<div class="col-xs-1" id="8"></div>
+						<div class="col-xs-1" id="9"></div>
+						<div class="col-xs-1" id="10"></div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-6"></div>
+					<div class="col-xs-6"><br/>
+						Letters Guess:<br/><br/>
+						<div id="letters-guessed"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script src="assets/javascript/game.js"></script>
+</body>
+</html>
