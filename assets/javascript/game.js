@@ -1,6 +1,6 @@
 var lives = 1;
 var wins = 0;
-var loses = 0;
+var losses = 0;
 var i = 0;
 var newLost = 0;
 
@@ -20,8 +20,12 @@ function getWord() {
 var fourLetters = document.getElementById("current-word");
 
 function addLetterToArray(){
+	if(globalKeyCodeStroke !== 32){
 	lettersChosen.push(globalKeyStroke);
 	document.getElementById("letters-guessed").innerHTML = lettersChosen.toString();
+	}else if(globalKeyCodeStroke === 32){
+		document.getElementById("letters-guessed").innerHTML = lettersChosen.toString();
+	}
 }
 
 function weHaveAWinner(){
@@ -30,8 +34,8 @@ function weHaveAWinner(){
 }
 
 function weHaveALoser(){
-	loses++;
-	document.getElementById("loses").innerHTML = loses;
+	losses++;
+	document.getElementById("losses").innerHTML = losses;
 	newLost = 1;
 	return false;
 }
@@ -103,7 +107,7 @@ function checkIfInArray(){
 }
 
 function weLost(){
-	if(lives < 1){
+	if(lives <= 1){
 		console.log("In the weLost Function!");
 		return true;
 	}
@@ -112,21 +116,24 @@ function weLost(){
 for(var i = 0; i < lives; i++){
 	document.onkeyup = function(event) {
 		globalKeyStroke = event.key;
+		globalKeyCodeStroke = event.keyCode;
 		if(event.keyCode === 32){
+		  lettersChosen.length = 0;
 		  getWord();
 		  setLives(2);
 		  newLost = 0;
-		  lettersChosen.length = 0;
+		  addLetterToArray();
 		  console.log("The Lives are: " + lives);
 		  chooseWord();
 		  clearDivs();
 		  resetDivs();
 		}else{
 			//check if letter input is in word or in array
-			if(lives > 0){
+			if(lives > 1){
 			console.log("Key Stroke is: " + globalKeyStroke);
 			checkIfInArray();
 			}else if(weLost() && newLost === 0){
+				checkIfInArray();
 				weHaveALoser();
 			}
 		}
