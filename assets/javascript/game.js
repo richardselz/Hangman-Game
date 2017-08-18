@@ -127,7 +127,7 @@ function weLost(){
 
 
 document.onkeyup = function(event) {
-globalKeyStroke = event.key;
+globalKeyStroke = event.key.toLowerCase();
 globalKeyCodeStroke = event.keyCode;
 if(event.keyCode === 32){
   lettersChosen.length = 0;
