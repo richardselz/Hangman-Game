@@ -10,6 +10,7 @@ var theWord = "";
 var lettersChosen = [];
 var correctLetter = 0;
 var audio = new Audio('assets/sound/theSound.mp3');
+var e = new KeyboardEvent('keydown',{'keyCode':32,'which':32});
 
 function pauseCurrentAudio() {
 	audio.pause();
@@ -28,11 +29,11 @@ function getWord() {
 
 var fourLetters = document.getElementById("current-word");
 
-function addLetterToArray(){
+function addLetterToArray(x){
 	if(globalKeyCodeStroke !== 32){
 	lettersChosen.push(globalKeyStroke);
 	document.getElementById("letters-guessed").innerHTML = lettersChosen.toString();
-	}else if(globalKeyCodeStroke === 32){
+	}else if(globalKeyCodeStroke === 32 || x === "reset"){
 		document.getElementById("letters-guessed").innerHTML = lettersChosen.toString();
 	}
 }
@@ -40,6 +41,7 @@ function addLetterToArray(){
 function weHaveAWinner(){
 	wins++;
 	document.getElementById("wins").innerHTML = wins;
+	newGame();
 }
 
 function weHaveALoser(){
@@ -121,8 +123,24 @@ function checkIfInArray(){
 function weLost(){
 	if(lives <= 1){
 		// console.log("In the weLost Function!");
+		newGame();
 		return true;
 	}
+}
+
+function newGame() {
+  document.dispatchEvent(e);
+  getWord();
+  setLives(10);
+  newLost = 0;
+  playAudio();
+  addLetterToArray("reset");
+  lettersChosen.length = 0; //clears array
+  
+  // console.log("The Lives are: " + lives);
+  // chooseWord();
+  clearDivs();
+  resetDivs();
 }
 
 
@@ -130,16 +148,7 @@ document.onkeyup = function(event) {
 globalKeyStroke = event.key.toLowerCase();
 globalKeyCodeStroke = event.keyCode;
 if(event.keyCode === 32){
-  lettersChosen.length = 0;
-  getWord();
-  setLives(10);
-  playAudio();
-  newLost = 0;
-  addLetterToArray();
-  // console.log("The Lives are: " + lives);
-  // chooseWord();
-  clearDivs();
-  resetDivs();
+   newGame();
 }else{
 	//check if letter input is in word or in array
 	if(lives > 1){
