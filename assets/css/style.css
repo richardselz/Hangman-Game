@@ -1,0 +1,13 @@
+body {
+	background-image: url('https://images3.alphacoders.com/773/773135.jpg');
+	text-align: left;
+}
+
+.container {
+	background-color: #fff;
+	width:650px;
+}
+
+#heading {
+	text-align: center;
+}

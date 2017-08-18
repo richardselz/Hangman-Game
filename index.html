@@ -8,19 +8,20 @@
 	<link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
-	<div class="container" style="background-color: #ccc;">
+	<div class="container">
 		<div class="row">
 			<div class="col-xs-12">
 				<div class="row">
-					<div class="col-xs-12">
-						Welcome to Hangman!
+					<div class="col-xs-12" id="heading">
+						<h1>Welcome to Hangman!</h1><br/>
+						Press Spacebar to Get Started! (and to reset game)<br/><br/>
+						The game is utilizing words that should be common knowledge after taking this course.<br/><br/>
 					</div>
 				</div>
 				<div class="row">
-					<div class="col-xs-6">Pictures Here</div>
-					<div class="col-xs-6">Press Spacebar to Get Started!<br/><br/>
-					Wins: <div id="wins"></div><br/>Loses: <div id="losses"></div><br/>Lives: <div id="lives"></div><br/>
-					Current Word<br/><br/>
+					<div class="col-xs-12">
+					Wins: <div id="wins"></div><br/>Losses: <div id="losses"></div><br/>Lives: <div id="lives"></div><br/>
+					Current Word:<br/><br/>
 					<div id="current-word">
 						<div class="col-xs-1" id="1"></div>
 						<div class="col-xs-1" id="2"></div>
@@ -33,11 +34,11 @@
 						<div class="col-xs-1" id="9"></div>
 						<div class="col-xs-1" id="10"></div>
 					</div>
+					</div>
 				</div>
 				<div class="row">
-					<div class="col-xs-6"></div>
-					<div class="col-xs-6"><br/>
-						Letters Guess:<br/><br/>
+					<div class="col-xs-12"><br/>
+						Letters Guessed:<br/><br/>
 						<div id="letters-guessed"></div>
 					</div>
 				</div>

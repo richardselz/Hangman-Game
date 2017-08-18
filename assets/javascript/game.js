@@ -37,6 +37,7 @@ function weHaveALoser(){
 	losses++;
 	document.getElementById("losses").innerHTML = losses;
 	newLost = 1;
+	document.getElementById("restartGame").style.display = inline;
 	return false;
 }
 
