@@ -9,6 +9,15 @@ var words = ["jquery", "python", "html", "javascript", "camelcase", "css", "mysq
 var theWord = "";
 var lettersChosen = [];
 var correctLetter = 0;
+var audio = new Audio('assets/sound/theSound.mp3');
+
+function pauseCurrentAudio() {
+	audio.pause();
+}
+
+function playAudio() {
+	audio.play();
+}
 
 function getWord() {
 	var randomValue = (Math.floor(Math.random() * words.length));
@@ -80,8 +89,10 @@ function checkIfInWord() {
 		if(theWord.indexOf(globalKeyStroke) >= 0){
 			for(var i = 0; i < theWord.length; i++){
 				if(theWord[i].indexOf(globalKeyStroke) >= 0) {
-				console.log("In the If of the for in CheckIfInArray");
+				// console.log("In the If of the for in CheckIfInArray");
 				updateGetElement(i, globalKeyStroke);
+				pauseCurrentAudio();
+				playAudio();
 				correctLetter++; // This counts to correct number of letters to trigger winner!
 				addLetterToArray();
 				if(correctLetter >= theWord.length){
@@ -100,7 +111,7 @@ function checkIfInWord() {
 function checkIfInArray(){
 	for(var i = 0; i < lettersChosen.length + 1; i++){
 		if(lettersChosen.indexOf(globalKeyStroke) === -1){
-			console.log("In checkIfInArray and the letter has not been chosen before.");
+			// console.log("In checkIfInArray and the letter has not been chosen before.");
 			checkIfInWord();
 			return true;
 		}
@@ -109,37 +120,38 @@ function checkIfInArray(){
 
 function weLost(){
 	if(lives <= 1){
-		console.log("In the weLost Function!");
+		// console.log("In the weLost Function!");
 		return true;
 	}
 }
 
-do{
-	document.onkeyup = function(event) {
-		globalKeyStroke = event.key;
-		globalKeyCodeStroke = event.keyCode;
-		if(event.keyCode === 32){
-		  lettersChosen.length = 0;
-		  getWord();
-		  setLives(10);
-		  newLost = 0;
-		  addLetterToArray();
-		  console.log("The Lives are: " + lives);
-		  // chooseWord();
-		  clearDivs();
-		  resetDivs();
-		}else{
-			//check if letter input is in word or in array
-			if(lives > 1){
-			console.log("Key Stroke is: " + globalKeyStroke);
-			checkIfInArray();
-			}else if(weLost() && newLost === 0){
-				checkIfInArray();
-				weHaveALoser();
-			}
-		}
-	};
-}while(globalKeyCodeStroke !== 27)
+
+document.onkeyup = function(event) {
+globalKeyStroke = event.key;
+globalKeyCodeStroke = event.keyCode;
+if(event.keyCode === 32){
+  lettersChosen.length = 0;
+  getWord();
+  setLives(10);
+  playAudio();
+  newLost = 0;
+  addLetterToArray();
+  // console.log("The Lives are: " + lives);
+  // chooseWord();
+  clearDivs();
+  resetDivs();
+}else{
+	//check if letter input is in word or in array
+	if(lives > 1){
+	// console.log("Key Stroke is: " + globalKeyStroke);
+	checkIfInArray();
+	}else if(weLost() && newLost === 0){
+		checkIfInArray();
+		weHaveALoser();
+	}
+}
+};
+
 
 // function chooseWord(){
 
